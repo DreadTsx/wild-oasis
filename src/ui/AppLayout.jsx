@@ -8,6 +8,7 @@ const StyledApp = styled.div`
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
+  overflow: scroll;
 `;
 
 const Main = styled.main`
