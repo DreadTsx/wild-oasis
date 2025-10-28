@@ -9,7 +9,7 @@ function Cabins() {
   const [showForm, setShowForm] = useState(false);
   const handledisplayForm = () => {
     setShowForm((form) => !form);
-    console.log("showing form rn");
+    // console.log("showing form rn");
   };
   return (
     <>
