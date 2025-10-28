@@ -47,6 +47,9 @@ export async function createEditCabin(newCabin, id) {
     throw new Error("Cabin could not be created");
   }
   //? 2. If no.1 was successful upload the image
+  //* If the the image for the cabin has alresdy been uploaded we dont need to reupload again we just return the data....
+  if (hasImagePath) return data;
+  //* If not just upload
   const { error: storageError } = await supabase.storage
     .from("cabin-images")
     .upload(imageName, newCabin.image);
