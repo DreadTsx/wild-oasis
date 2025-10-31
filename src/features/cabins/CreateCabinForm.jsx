@@ -6,12 +6,12 @@ import FileInput from "../../ui/FileInput";
 import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
-import { useEditCabin } from "./useEditCabin";
+import { useUpdateCabin } from "./useUpdateCabin";
 //? Creating and Editing Cabins
 function CreateCabinForm({ cabinToEdit = {} }) {
   //? Custom hooks for creating and Editing Cabins
   const { createCabin, isCreating } = useCreateCabin();
-  const { editCabin, isEditing } = useEditCabin();
+  const { editCabin, isEditing } = useUpdateCabin();
   //
   const isWorking = isCreating || isEditing;
   //
