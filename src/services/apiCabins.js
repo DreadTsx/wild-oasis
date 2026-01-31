@@ -1,4 +1,4 @@
-import supabase, { supabaseUrl } from "./superbase";
+import supabase, { supabaseUrl } from "./supabase";
 
 export async function getCabins() {
   const { data, error } = await supabase.from("cabins").select("*");
@@ -60,7 +60,7 @@ export async function createEditCabin(newCabin, id) {
     //
     console.error(storageError);
     throw new Error(
-      "Cabin image could not be uploaded and the cabin was not created"
+      "Cabin image could not be uploaded and the cabin was not created",
     );
   }
   return data;
