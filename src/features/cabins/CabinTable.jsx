@@ -35,16 +35,24 @@ function CabinTable() {
   const [searchParams] = useSearchParams();
   //
   if (isLoading) return <Spinner />;
+  //
+  if (!cabins.length) return <Empty resourceName="cabins" />;
 
   //? 1) FILTER
   const filterValue = searchParams.get("discount") || "all";
 
   let filteredCabin;
-  if (filterValue === "all") filteredCabin = cabins;
-  if (filterValue === "no-discount")
-    filteredCabin = cabins.filter((cabin) => cabin.discount === 0);
-  if (filterValue === "with-discount")
-    filteredCabin = cabins.filter((cabin) => cabin.discount > 0);
+  switch (filterValue) {
+    case "no-discount":
+      filteredCabin = cabins.filter((cabin) => cabin.discount === 0);
+      break;
+    case "with-discount":
+      filteredCabin = cabins.filter((cabin) => cabin.discount > 0);
+      break;
+    case "all":
+    default:
+      filteredCabin = cabins;
+  }
 
   //? 2) SORT
   const sortBy = searchParams.get("sortBy") || "startDate-asc";

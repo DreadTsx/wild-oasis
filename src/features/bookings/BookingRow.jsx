@@ -57,12 +57,10 @@ function BookingRow({
   return (
     <Table.Row>
       <Cabin>{cabinName}</Cabin>
-
       <Stacked>
         <span>{guestName}</span>
         <span>{email}</span>
       </Stacked>
-
       <Stacked>
         <span>
           {isToday(new Date(startDate))
@@ -75,9 +73,8 @@ function BookingRow({
           {format(new Date(endDate), "MMM dd yyyy")}
         </span>
       </Stacked>
-
-      <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
-
+      <Tag $type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
+      type
       <Amount>{formatCurrency(totalPrice)}</Amount>
     </Table.Row>
   );
