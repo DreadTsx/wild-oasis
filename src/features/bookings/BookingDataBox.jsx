@@ -30,6 +30,8 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
 
   svg {
     height: 3.2rem;
@@ -49,15 +51,29 @@ const Header = styled.header`
     font-size: 2rem;
     margin-left: 4px;
   }
+
+  @media (max-width: 600px) {
+    padding: 1.6rem 2.4rem;
+    font-size: 1.4rem;
+
+    & div:first-child {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
+
+  @media (max-width: 600px) {
+    padding: 2rem 2.4rem 1.2rem;
+  }
 `;
 
 const Guest = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1.2rem;
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
@@ -72,6 +88,8 @@ const Price = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
   padding: 1.6rem 3.2rem;
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
@@ -92,6 +110,10 @@ const Price = styled.div`
     width: 2.4rem;
     color: currentColor !important;
   }
+
+  @media (max-width: 600px) {
+    padding: 1.4rem 2rem;
+  }
 `;
 
 const Footer = styled.footer`
@@ -99,6 +121,10 @@ const Footer = styled.footer`
   font-size: 1.2rem;
   color: var(--color-grey-500);
   text-align: right;
+
+  @media (max-width: 600px) {
+    padding: 1.4rem 2.4rem;
+  }
 `;
 
 // A purely presentational component

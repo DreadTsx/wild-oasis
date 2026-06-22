@@ -7,7 +7,22 @@ const StyledTable = styled.div`
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
-  overflow: hidden;
+
+  /* Was "overflow: hidden". Tables can get denser than a phone screen can
+     fit (image + name + capacity + price + discount + menu); rather than
+     forcing that onto the page, this card scrolls horizontally on its own
+     when it genuinely needs to, with the same slim custom scrollbar. */
+  overflow: auto;
+
+  /* Below this width we stop being a dense grid table and become a stack
+     of self-contained cards (see StyledRow), so the outer card chrome is
+     no longer needed -- each row carries its own border/background instead. */
+  @media (max-width: 600px) {
+    border: none;
+    background-color: transparent;
+    border-radius: 0;
+    overflow: visible;
+  }
 `;
 
 const CommonRow = styled.div`
@@ -16,6 +31,10 @@ const CommonRow = styled.div`
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
+
+  @media (max-width: 600px) {
+    column-gap: 1.2rem;
+  }
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -27,6 +46,13 @@ const StyledHeader = styled(CommonRow)`
   letter-spacing: 0.4px;
   font-weight: 600;
   color: var(--color-grey-600);
+  white-space: nowrap;
+
+  /* Column labels don't map onto a stacked card layout, so the header
+     row is hidden once rows switch to cards below. */
+  @media (max-width: 600px) {
+    display: none;
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
@@ -35,10 +61,35 @@ const StyledRow = styled(CommonRow)`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);
   }
+
+  /* Default mobile fallback: stack every field full-width, top to bottom,
+     so nothing gets squeezed into an unreadable sliver. Individual tables
+     (BookingRow, CabinRow) extend this with their own grid-template-areas
+     for a tidier, purpose-built card -- see "& > *:nth-child(n)" overrides
+     in those files. */
+  @media (max-width: 600px) {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+    padding: 1.6rem;
+    margin: 0 1.2rem 1rem;
+    border: 1px solid var(--color-grey-100);
+    border-radius: var(--border-radius-md);
+    background-color: var(--color-grey-0);
+
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--color-grey-100);
+    }
+  }
 `;
 
 const StyledBody = styled.section`
   margin: 0.4rem 0;
+
+  @media (max-width: 600px) {
+    margin: 1.2rem 0 0;
+  }
 `;
 
 const Footer = styled.footer`
@@ -88,11 +139,11 @@ function Header({ children }) {
   );
 }
 
-function Row({ children }) {
+function Row({ children, className }) {
   const { columns } = useTableContext();
 
   return (
-    <StyledRow role="row" $columns={columns}>
+    <StyledRow role="row" $columns={columns} className={className}>
       {children}
     </StyledRow>
   );

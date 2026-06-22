@@ -18,18 +18,21 @@ const StyledToday = styled.div`
   gap: 2.4rem;
   grid-column: 1 / span 2;
   padding-top: 2.4rem;
+  height: 34rem;
+
+  @media (max-width: 1099px) {
+    grid-column: 1 / -1;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2.4rem 1.6rem;
+  }
 `;
 
 const TodayList = styled.ul`
-  overflow: scroll;
-  overflow-x: hidden;
-
-  /* Removing scrollbars for webkit, firefox, and ms, respectively */
-  &::-webkit-scrollbar {
-    width: 0 !important;
-  }
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 `;
 
 const NoActivity = styled.p`

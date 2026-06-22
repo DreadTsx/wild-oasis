@@ -2,18 +2,36 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled from "styled-components";
+import { SidebarProvider } from "../context/SidebarContext";
 
 const StyledApp = styled.div`
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
-  overflow: scroll;
+
+  /* Was "overflow: scroll", which forces a horizontal scrollbar to always
+     show even when nothing overflows. We only ever need vertical scroll here. */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media (max-width: 1099px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const Main = styled.main`
   background-color: var(--color-grey-50);
   padding: 4rem 4.8rem 6.4rem;
+  min-width: 0;
+
+  @media (max-width: 1099px) {
+    padding: 3.2rem 2.4rem 4.8rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2.4rem 1.6rem 4rem;
+  }
 `;
 
 const Container = styled.div`
@@ -26,15 +44,17 @@ const Container = styled.div`
 
 function AppLayout() {
   return (
-    <StyledApp>
-      <Header />
-      <Sidebar />
-      <Main>
-        <Container>
-          <Outlet />
-        </Container>
-      </Main>
-    </StyledApp>
+    <SidebarProvider>
+      <StyledApp>
+        <Header />
+        <Sidebar />
+        <Main>
+          <Container>
+            <Outlet />
+          </Container>
+        </Main>
+      </StyledApp>
+    </SidebarProvider>
   );
 }
 

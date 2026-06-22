@@ -188,6 +188,40 @@ img {
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
 
+/* Prevent the page from ever showing a horizontal scrollbar. */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Custom themed scrollbar, applied app-wide (sidebar, main content, tables,
+   modals, the dashboard's "Today" list). Uses the same grey tokens as the
+   rest of the UI, so it adapts automatically in dark mode too. */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-grey-300) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-grey-300);
+  border-radius: 100px;
+  background-clip: padding-box;
+  border: 0.25rem solid transparent;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-grey-400);
+}
+
 /*
 FOR DARK MODE
 

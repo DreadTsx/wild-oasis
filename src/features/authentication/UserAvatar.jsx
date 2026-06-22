@@ -8,6 +8,7 @@ const StyledUserAvatar = styled.div`
   font-weight: 500;
   font-size: 1.4rem;
   color: var(--color-grey-600);
+  min-width: 0;
 `;
 
 const Avatar = styled.img`
@@ -19,7 +20,19 @@ const Avatar = styled.img`
   object-position: center;
   border-radius: 50%;
   outline: 2px solid var(--color-grey-100);
+  flex-shrink: 0;
 `;
+
+const Name = styled.span`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 420px) {
+    display: none;
+  }
+`;
+
 function UserAvatar() {
   const { user } = useUser();
   const { fullName, avatar } = user.user_metadata;
@@ -29,7 +42,7 @@ function UserAvatar() {
         src={avatar || "default-user.jpg"}
         alt={`Avatar of ${fullName}`}
       />
-      <span>{fullName || "User"}</span>
+      <Name>{fullName || "User"}</Name>
     </StyledUserAvatar>
   );
 }

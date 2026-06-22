@@ -8,6 +8,7 @@ import {
   HiOutlineUser,
 } from "react-icons/hi2";
 import styled from "styled-components";
+import { useSidebar } from "../context/SidebarContext";
 
 const NavList = styled.ul`
   display: flex;
@@ -55,17 +56,19 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 function MainNav() {
+  const { close } = useSidebar();
+
   return (
     <nav>
       <NavList>
         <li>
-          <StyledNavLink to="/dashboard">
+          <StyledNavLink to="/dashboard" onClick={close}>
             <HiOutlineHome /> <span>Home</span>
           </StyledNavLink>
         </li>
 
         <li>
-          <StyledNavLink to="/bookings">
+          <StyledNavLink to="/bookings" onClick={close}>
             {" "}
             <HiOutlineCalendarDays />
             <span>Bookings</span>
@@ -73,7 +76,7 @@ function MainNav() {
         </li>
 
         <li>
-          <StyledNavLink to="/cabins">
+          <StyledNavLink to="/cabins" onClick={close}>
             {" "}
             <HiOutlineHomeModern />
             <span>Cabins</span>
@@ -81,7 +84,7 @@ function MainNav() {
         </li>
 
         <li>
-          <StyledNavLink to="/users">
+          <StyledNavLink to="/users" onClick={close}>
             {" "}
             <HiOutlineUser />
             <span>Users</span>
@@ -89,7 +92,7 @@ function MainNav() {
         </li>
 
         <li>
-          <StyledNavLink to="/settings">
+          <StyledNavLink to="/settings" onClick={close}>
             {" "}
             <HiOutlineCog6Tooth />
             <span>Settings</span>
